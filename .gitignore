@@ -1,0 +1,15 @@
+/build/
+.gradle/
+
+.idea/
+*.iml
+/out/
+.idea/workspace.xml
+
+client/.gradle/
+client/build/
+
+common/build/
+
+server/.gradle/
+server/build/

@@ -1,0 +1,5 @@
+rootProject.name = 'spring-boot-gRPC'
+include "common"
+include "client"
+include "server"
+

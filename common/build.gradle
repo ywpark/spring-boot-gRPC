@@ -1,0 +1,43 @@
+plugins {
+    /**
+     * java 플러그인의 확장판 
+     * api configuration 을 사용할 수 있음
+     */
+    id 'java-library'
+    id 'com.google.protobuf' version '0.9.4'
+}
+
+dependencies {
+    // proto 관련
+    api 'com.google.protobuf:protobuf-java:3.25.1'
+    api 'io.grpc:grpc-stub:1.63.0'
+    api 'io.grpc:grpc-protobuf:1.63.0'
+    compileOnly 'org.apache.tomcat:annotations-api:6.0.53' // JDK 9+ 대응
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.25.1"
+    }
+    plugins {
+        grpc {
+            artifact = "io.grpc:protoc-gen-grpc-java:1.63.0"
+        }
+    }
+    generateProtoTasks {
+        all().each { task ->
+            task.plugins {
+                grpc {}
+            }
+        }
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs 'build/generated/source/proto/main/java',
+                    'build/generated/source/proto/main/grpc'
+        }
+    }
+}

@@ -1,0 +1,50 @@
+/**
+ 사용할 프로토콜 버퍼 문법 버전 정의
+ */
+syntax = "proto3";
+
+/**
+ 메세지 / 서비스 마다 java 파일을 생성할 지 여부
+ true : 각 각의 클래스 파일이 생성
+ false : 모든 메세지/서비스가 하나의 java 파일에 다 들어감
+
+ 아래 기준으로는 true 이기 때문에 HelloServiceGrpc.java , HelloRequest.java , HelloReply.java 파일이 생성됨
+
+ */
+option java_multiple_files = true;
+
+/**
+ 생성된 자바 클래스들이 들어갈 패키지 정의
+ 지정하지 않으면 디폴트 패키지가 생김
+ */
+option java_package = "com.example.common";
+
+/**
+ java_multiple_files= false 일 경우 외부 wrapper 클래스 이름
+ */
+option java_outer_classname = "HelloProto";
+
+/**
+ gRPC 서비스 정의
+ 내부의 rpc 메소드들이 gRPC 엔드포인트가 됨
+ */
+service HelloService {
+
+  // gRPC 메소드 정의
+  // 입력 타입은 HelloRequest 출력 타입은 HelloReply
+  rpc SayHello(HelloRequest) returns (HelloReply);
+}
+
+/**
+ gRPC 요청 메세지 정의
+ */
+message HelloRequest {
+  string name = 1; // 필드 정의 ( 타입 string, 필드 번호 = 1 )
+}
+
+/**
+ gRPC 응답 메세지 정의
+ */
+message HelloReply {
+  string message = 1; // 필드 정의 ( 타입 string, 필드 번호 = 1 )
+}
