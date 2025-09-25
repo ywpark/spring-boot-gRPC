@@ -2,6 +2,10 @@ plugins {
     id 'java'
 }
 
+/**
+ * 루트 프로젝트를 포함해 하위 프로젝트 전체에
+ * 영향을 주는 설정
+ */
 allprojects {
     group = 'com.example'
     version = '1.0.0'
@@ -11,7 +15,13 @@ allprojects {
     }
 }
 
+/**
+ * settings.gradle 에 include 된 하위 프로젝트에
+ * 영향을 주는 설정
+ *
+ */
 subprojects {
+
     apply plugin: 'java'
 
     java {
